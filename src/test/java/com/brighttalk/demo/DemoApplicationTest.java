@@ -2,7 +2,6 @@ package com.brighttalk.demo;
 
 import com.brighttalk.demo.dto.RealmRequest;
 import com.brighttalk.demo.repository.RealmRepository;
-import com.sun.tools.javac.util.List;
 import org.json.JSONException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,6 +13,8 @@ import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.*;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.util.Arrays;
 
 import static com.brighttalk.demo.service.RealmBuilder.*;
 import static org.junit.Assert.assertEquals;
@@ -64,7 +65,7 @@ public class DemoApplicationTest {
     long dataBefore = realmRepository.count();
 
     HttpHeaders headers = new HttpHeaders();
-    headers.setAccept(List.of(MediaType.APPLICATION_JSON));
+    headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
     headers.setContentType(MediaType.APPLICATION_JSON);
 
     HttpEntity<RealmRequest> entity = new HttpEntity<>(new RealmRequest(DUMMY_NAME, DUMMY_DESCRIPTION), headers);

@@ -8,11 +8,3 @@ CREATE TABLE IF NOT EXISTS realm (
   realm_description VARCHAR(255),
   encryption_key CHAR(32) NOT NULL
 );
-
-
-  /*
-  id Unique ID. Primary key. System-generated.
-  name Realm name (alias for ID). Must be unique.
-  description Realm description. Up to 255 chars.
-  key Realm encryption key. Fixed length 32 chars.
-*/
