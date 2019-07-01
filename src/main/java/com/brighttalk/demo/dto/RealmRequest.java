@@ -37,4 +37,12 @@ public class RealmRequest {
   public void setDescription(String description) {
     this.description = description;
   }
+
+  @Override
+  public String toString() {
+    return "RealmRequest{" +
+        "name='" + name + '\'' +
+        ", description='" + description + '\'' +
+        '}';
+  }
 }

@@ -9,19 +9,12 @@ public class RealmBuilder {
   public final static String DUMMY_DESCRIPTION = "dummyDescription";
   public final static String DUMMY_KEY = "AIA1esBlFEUzlSyBHCY4uWpyK6deweCh";
 
-  public static Realm createModel(int id) {
+  public static Realm create(int id) {
     return new Realm(id, DUMMY_NAME, DUMMY_DESCRIPTION, DUMMY_KEY);
   }
 
-  public static Realm createModel(String name, String description) {
+  public static Realm create(String name, String description) {
     return new Realm(DUMMY_ID, name, description, DUMMY_KEY);
-  }
-
-  public static RealmRequest createRequest() {
-    RealmRequest realmRequest = new RealmRequest();
-    realmRequest.setName(DUMMY_NAME);
-    realmRequest.setDescription(DUMMY_DESCRIPTION);
-    return realmRequest;
   }
 
 }

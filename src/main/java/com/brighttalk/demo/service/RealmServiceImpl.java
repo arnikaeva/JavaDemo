@@ -5,7 +5,8 @@ import com.brighttalk.demo.exception.ExceptionCode;
 import com.brighttalk.demo.exception.RealmServiceException;
 import com.brighttalk.demo.model.Realm;
 import com.brighttalk.demo.repository.RealmRepository;
-import org.hibernate.exception.ConstraintViolationException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -15,7 +16,10 @@ import java.util.Optional;
 @Service
 public class RealmServiceImpl implements RealmService {
 
+  final Logger logger = LoggerFactory.getLogger(RealmServiceImpl.class);
+
   RealmRepository realmRepository;
+
   EncryptionService encryptionService;
 
   public RealmServiceImpl(RealmRepository realmRepository, EncryptionService encryptionService) {
@@ -36,6 +40,7 @@ public class RealmServiceImpl implements RealmService {
       if (isDuplicatedNameError(realm)) {
         throw new RealmServiceException(e, ExceptionCode.DUPLICATE_REALM_NAME);
       } else {
+        logger.error("Unknown exception while saving new realm {}", request, e);
         throw new RealmServiceException(e, ExceptionCode.UNKNOWN_ERROR);
       }
     }

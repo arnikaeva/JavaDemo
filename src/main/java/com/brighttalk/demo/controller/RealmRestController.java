@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.*;
 public class RealmRestController {
 
   RealmService realmService;
-  final Logger logger = LoggerFactory.getLogger(RealmRestController.class);
 
   public RealmRestController(RealmService realmService) {
     this.realmService = realmService;
@@ -29,8 +28,8 @@ public class RealmRestController {
 
   @PostMapping(
       value = "service/user/realm",
-      consumes ={ MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE },
-      produces = { MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE })
+      consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE },
+      produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
   public ResponseEntity<RealmResponse> create(@RequestBody RealmRequest request) throws RealmServiceException {
 
     Realm realm = realmService.create(request);
@@ -43,8 +42,7 @@ public class RealmRestController {
 
   @GetMapping(
       value = "service/user/realm/{id}",
-      consumes ={ MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE },
-      produces = { MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE })
+      produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
   public ResponseEntity<RealmResponse> get(@PathVariable(name = "id") int id) throws RealmServiceException {
 
     Realm realm = realmService.get(id);

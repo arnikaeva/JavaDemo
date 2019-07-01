@@ -44,7 +44,7 @@ public class RealmServiceTest {
     String description = RealmBuilder.DUMMY_DESCRIPTION;
     ArgumentCaptor<Realm> captor = ArgumentCaptor.forClass(Realm.class);
     RealmRequest realmRequest = new RealmRequest(name, description);
-    Realm expected = RealmBuilder.createModel(name, description);
+    Realm expected = RealmBuilder.create(name, description);
 
     when(encryptionService.generateRealmKey(realmRequest)).thenReturn(RealmBuilder.DUMMY_KEY);
     when(realmRepository.save(captor.capture())).thenReturn(expected);
@@ -105,7 +105,7 @@ public class RealmServiceTest {
   @Test
   public void get_success() throws RealmServiceException {
     int id = RealmBuilder.DUMMY_ID;
-    Realm expected = RealmBuilder.createModel(id);
+    Realm expected = RealmBuilder.create(id);
 
     when(realmRepository.findById(id)).thenReturn(Optional.of(expected));
 
