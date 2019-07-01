@@ -9,6 +9,10 @@ public class RealmBuilder {
   public final static String DUMMY_DESCRIPTION = "dummyDescription";
   public final static String DUMMY_KEY = "AIA1esBlFEUzlSyBHCY4uWpyK6deweCh";
 
+  public static Realm create() {
+    return new Realm(DUMMY_ID, DUMMY_NAME, DUMMY_DESCRIPTION, DUMMY_KEY);
+  }
+
   public static Realm create(int id) {
     return new Realm(id, DUMMY_NAME, DUMMY_DESCRIPTION, DUMMY_KEY);
   }
