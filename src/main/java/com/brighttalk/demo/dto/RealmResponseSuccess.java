@@ -2,15 +2,27 @@ package com.brighttalk.demo.dto;
 
 import com.brighttalk.demo.model.Realm;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement(name = "realm")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class RealmResponseSuccess extends RealmResponse {
 
+  @XmlAttribute
   private int id;
 
+  @XmlAttribute
   private String name;
 
   private String description;
 
   private String key;
+
+  public RealmResponseSuccess() {
+  }
 
   public RealmResponseSuccess(int id, String name, String description, String key) {
     this.id = id;

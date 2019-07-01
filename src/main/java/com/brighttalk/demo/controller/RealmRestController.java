@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,42 +27,40 @@ public class RealmRestController {
     this.realmService = realmService;
   }
 
-  @PostMapping("service/user/realm")
-  public ResponseEntity<RealmResponse> create(@RequestBody RealmRequest request) {
-    RealmResponse response;
-    HttpStatus httpStatus;
+  @PostMapping(
+      value = "service/user/realm",
+      consumes ={ MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE },
+      produces = { MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE })
+  public ResponseEntity<RealmResponse> create(@RequestBody RealmRequest request) throws RealmServiceException {
 
-    try {
-      Realm realm = realmService.create(request);
-      response = new RealmResponseSuccess(realm);
-      httpStatus = HttpStatus.OK;
+    Realm realm = realmService.create(request);
 
-    } catch (RealmServiceException e) {
-      logger.error(e.getMessage());
-      response = new RealmResponseFailure(e.getCode());
-      httpStatus = HttpStatus.BAD_REQUEST;
-    }
-
-    return new ResponseEntity<>(response, new HttpHeaders(), httpStatus);
+    return new ResponseEntity<>(
+        new RealmResponseSuccess(realm),
+        new HttpHeaders(),
+        HttpStatus.OK);
   }
 
-  @GetMapping("service/user/realm/{id}")
-  public ResponseEntity<RealmResponse> get(@PathVariable(name = "id") int id) {
-    RealmResponse response;
-    HttpStatus httpStatus;
+  @GetMapping(
+      value = "service/user/realm/{id}",
+      consumes ={ MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE },
+      produces = { MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE })
+  public ResponseEntity<RealmResponse> get(@PathVariable(name = "id") int id) throws RealmServiceException {
 
-    try {
-      Realm realm = realmService.get(id);
-      response = new RealmResponseSuccess(realm);
-      httpStatus = HttpStatus.OK;
+    Realm realm = realmService.get(id);
 
-    } catch (RealmServiceException e) {
-      logger.error(e.getMessage());
-      response = new RealmResponseFailure(e.getCode());
-      httpStatus = HttpStatus.BAD_REQUEST;
-    }
+    return new ResponseEntity<>(
+        new RealmResponseSuccess(realm),
+        new HttpHeaders(),
+        HttpStatus.OK);
+  }
 
-    return new ResponseEntity<>(response, new HttpHeaders(), httpStatus);
+  @ExceptionHandler(RealmServiceException.class)
+  public ResponseEntity<RealmResponse> serviceException(RealmServiceException e) {
+    return new ResponseEntity<>(
+        new RealmResponseFailure(e.getCode()),
+        new HttpHeaders(),
+        HttpStatus.BAD_REQUEST);
   }
 
   @ExceptionHandler(NumberFormatException.class)
