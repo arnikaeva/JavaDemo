@@ -7,7 +7,7 @@ public class RealmBuilder {
   public final static int DUMMY_ID = 1;
   public final static String DUMMY_NAME = "dummyName";
   public final static String DUMMY_DESCRIPTION = "dummyDescription";
-  public final static String DUMMY_KEY = "dummyDescription";
+  public final static String DUMMY_KEY = "AIA1esBlFEUzlSyBHCY4uWpyK6deweCh";
 
   public static Realm createModel(int id) {
     return new Realm(id, DUMMY_NAME, DUMMY_DESCRIPTION, DUMMY_KEY);

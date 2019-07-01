@@ -4,10 +4,11 @@ import com.brighttalk.demo.dto.RealmRequest;
 import org.junit.Before;
 import org.junit.Test;
 
-import static com.brighttalk.demo.service.EncryptionServiceImpl.KEY_LENGTH;
 import static org.junit.Assert.*;
 
 public class EncryptionServiceTest {
+
+  static final int KEY_LENGTH = 32;
 
   EncryptionService encryptionService;
 
@@ -25,4 +26,8 @@ public class EncryptionServiceTest {
     assertNotNull(key);
     assertEquals(KEY_LENGTH, key.length());
   }
+
+
+
+
 }
